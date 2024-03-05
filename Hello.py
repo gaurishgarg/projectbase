@@ -20,7 +20,7 @@ LOGGER = get_logger(__name__)
 
 def run():
     st.set_page_config(
-        page_title="Hello",
+        page_title="Hello Gaurish",
         page_icon="👋",
     )
     st.write("Hello World\nThis is Gauirhs Backend")
