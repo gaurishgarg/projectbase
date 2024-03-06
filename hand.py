@@ -8,6 +8,7 @@ async def handle_message(websocket, path):
 
 async def websocket_server():
     async with websockets.serve(handle_message, "localhost", 8765):
+        st.write("Server running")
         await asyncio.Future()
 
 def startwebserver():
