@@ -14,7 +14,7 @@
 
 import streamlit as st
 from streamlit.logger import get_logger
-
+from hand import startwebserver
 LOGGER = get_logger(__name__)
 
 
@@ -24,6 +24,7 @@ def run():
         page_icon="👋",
     )
     st.write("Hello World\nThis is Gauirhs Backend")
+    startwebserver()
     # st.write("# Welcome to Streamlit! 👋")
 
     # st.sidebar.success("Select a demo above.")
