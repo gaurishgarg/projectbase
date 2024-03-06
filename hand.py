@@ -34,8 +34,9 @@ async def websocket_server():
                 # Keep the server running indefinitely
             await asyncio.Future()
        
-    except OSError as e:
+    except OSError as e:    
         st.error(f"OS Error: {e}")
+    finally:
         if server:
             server.close()
             await server.wait_closed()
