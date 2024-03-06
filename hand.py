@@ -4,6 +4,10 @@ import streamlit as st
 
 async def handle_message(websocket, path):
     try:
+        # Retrieve the original client address
+        client_address = websocket.remote_address
+        st.write(f"Client connected from: {client_address}")
+        
         async for message in websocket:
             # Handle incoming message
             st.text("Received message: " + message)
@@ -20,16 +24,16 @@ async def handle_message(websocket, path):
 async def websocket_server():
     server = None
     try:
-        # Start the WebSocket server
-          server = websockets.serve(handle_message, "localhost", 8765)
-          async with server:
-                
-                # Display server running message
-            st.write("WebSocket server running")
-                # Keep the server running indefinitely
-            await asyncio.Future()
-       
-    except OSError as e:    
+        # Start the WebSocket server listening on 0.0.0.0 (all available interfaces)
+        server = await websockets.serve(handle_message, "0.0.0.0", 0)
+        
+        # Retrieve the assigned port
+        assigned_port = server.sockets[0].getsockname()[1]
+        st.write(f"WebSocket server running on port {assigned_port}")
+        
+        # Keep the server running indefinitely
+        await server.wait_closed()
+    except OSError as e:
         st.error(f"OS Error: {e}")
 
 def start_websocket_server():
