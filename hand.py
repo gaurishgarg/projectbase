@@ -42,7 +42,8 @@ async def websocket_server():
         # Wait for the server to close
             await server.ws_server.wait_closed()
 
-            start_websocket_server()
+            st.write("Server closed")
+            # start_websocket_server()
 
 
 def start_websocket_server():
