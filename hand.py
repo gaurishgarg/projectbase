@@ -16,11 +16,6 @@ async def handle_message(websocket, path):
     except websockets.exceptions.ConnectionClosedError:
         # Handle client disconnect
         st.write("Client disconnected")
-    except Exception as e:
-        # Handle other errors
-        st.error(f"Server Error  Occured: {e}")
-        # Close the WebSocket server
-        await websocket.close()
 
 async def websocket_server():
     server = None
