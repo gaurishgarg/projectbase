@@ -36,15 +36,6 @@ async def websocket_server():
        
     except OSError as e:    
         st.error(f"OS Error: {e}")
-    finally:
-        if server:
-            server.ws_server.close()
-        # Wait for the server to close
-            await server.ws_server.wait_closed()
-
-            st.write("Server closed")
-            # start_websocket_server()
-
 
 def start_websocket_server():
     # Display a message indicating that the WebSocket server is starting

@@ -19,10 +19,16 @@ LOGGER = get_logger(__name__)
 
 
 def run():
+    
     st.set_page_config(
         page_title="Hello Gaurish",
         page_icon="👋",
     )
+
+# Hide Streamlit's stop button and footer using custom CSS
+
+# Your Streamlit app code here...
+
     st.write("Hello World\nThis is Gaurish Backend")
     start_websocket_server()
     # st.write("# Welcome to Streamlit! 👋")
