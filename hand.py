@@ -18,20 +18,29 @@ async def handle_message(websocket, path):
         st.write("Client disconnected")
     except Exception as e:
         # Handle other errors
-        st.error(f"Error: {e}")
+        st.error(f"Server Error  Occured: {e}")
+        # Close the WebSocket server
+        await websocket.close()
 
 async def websocket_server():
+    server = None
     try:
-        
         # Start the WebSocket server
-        async with websockets.serve(handle_message, "localhost", 8765):
-            # Display server running message
+          server = websockets.serve(handle_message, "localhost", 8765)
+          async with server:
+                
+                # Display server running message
             st.write("WebSocket server running")
-            # Keep the server running indefinitely
+                # Keep the server running indefinitely
             await asyncio.Future()
+       
     except OSError as e:
-        
-        st.error(f"Dear Gaurish An OS Error OCCURED: {e}")
+        st.error(f"OS Error: {e}")
+        if server:
+            server.close()
+            await server.wait_closed()
+            start_websocket_server()
+
 
 def start_websocket_server():
     # Display a message indicating that the WebSocket server is starting
@@ -39,5 +48,3 @@ def start_websocket_server():
     
     # Start the WebSocket server
     asyncio.run(websocket_server())
-
-
