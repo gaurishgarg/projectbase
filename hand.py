@@ -1,14 +1,11 @@
 import asyncio
 import websockets
 import streamlit as st
-from aiohttp import web
-
 
 async def handle_message(websocket, path):
     try:
         # Retrieve the original client address
         client_address = websocket.remote_address
-        st.write(f"Client connected from: {client_address}")
         
         async for message in websocket:
             # Handle incoming message
@@ -20,8 +17,8 @@ async def handle_message(websocket, path):
             # Send the response back to the client
             await websocket.send(response)
     except websockets.exceptions.ConnectionClosedError:
+        print("client disconnected")
         # Handle client disconnect
-        st.write("Client disconnected")
 
 async def websocket_server():
     server = None
@@ -30,8 +27,8 @@ async def websocket_server():
         server = await websockets.serve(handle_message, "0.0.0.0", 0)
         # Retrieve the assigned port
         assigned_port = server.sockets[0].getsockname()[1]
-        st.write("Websocket listening on port" )
-        st.write(assigned_port)
+        st.session_state.websocket_port = assigned_port
+        st.json({"port": assigned_port, "url":"ws://projectbase-gaurish.streamlit.app"})
         await server.wait_closed()
     except OSError as e:
         st.error(f"My OS Error: {e}")
@@ -39,7 +36,6 @@ async def websocket_server():
 
 def start_websocket_server():
     # Display a message indicating that the WebSocket server is starting
-    st.write("Starting WebSocket server...")
     # Start the WebSocket server
     asyncio.run(websocket_server())
 
