@@ -41,12 +41,12 @@ async def websocket_server():
         st.write("aiohttp runner innitialised")    
         await aiohttp_runner.setup()
         st.write("aiohttp runner set up")    
-        aiohttp_site = web.TCPSite(aiohttp_runner, 'localhost', 8000)
+        aiohttp_site = web.TCPSite(aiohttp_runner, 'localhost', 9509)
         st.write("aiohttp runner declared")    
         await aiohttp_site.start()
         st.write("aiohttp site started")    
         st.write(f"WebSocket server running on port {assigned_port}")
-        st.write(f"Port information available at http://localhost:8000/get_websocket_port")
+        st.write(f"Port information available at http://localhost:9509/get_websocket_port")
 
         # Keep the WebSocket server running indefinitely
         await server.wait_closed()
