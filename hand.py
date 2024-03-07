@@ -29,6 +29,7 @@ async def websocket_server():
         assigned_port = server.sockets[0].getsockname()[1]
         st.session_state.websocket_port = assigned_port
         st.json({"port": assigned_port, "url":"ws://projectbase-gaurish.streamlit.app"})
+        st.write("Testing HTML")
         await server.wait_closed()
     except OSError as e:
         st.error(f"My OS Error: {e}")
