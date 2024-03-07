@@ -46,7 +46,7 @@ async def websocket_server():
         await aiohttp_site.start()
         st.write("aiohttp site started")    
         st.write(f"WebSocket server running on port {assigned_port}")
-        st.write(f"Port information available at http://localhost:9509/get_websocket_port")
+        st.write(f"Port information available at http://projectbase-gaurish.streamlit.app:9509/get_websocket_port")
 
         # Keep the WebSocket server running indefinitely
         await server.wait_closed()
