@@ -58,3 +58,23 @@ def start_websocket_server():
     st.write("Starting WebSocket server...")
     # Start the WebSocket server
     asyncio.run(websocket_server())
+
+
+import psutil
+
+def get_streamlit_ports():
+    streamlit_ports = set()
+    for proc in psutil.process_iter():
+        try:
+            if "streamlit" in proc.name().lower():
+                for conn in proc.connections():
+                    if conn.status == "LISTEN":
+                        streamlit_ports.add(conn.laddr.port)
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
+    return streamlit_ports
+
+streamlit_ports = get_streamlit_ports()
+print("Streamlit Ports:")
+for port in streamlit_ports:
+    print(f"Port: {port}")
