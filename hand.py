@@ -47,11 +47,10 @@ async def websocket_server():
         # Keep the WebSocket server running indefinitely
         await server.wait_closed()
     except OSError as e:
-        st.error(f"OS Error: {e}")
+        st.error(f"My OS Error: {e}")
 
 def start_websocket_server():
     # Display a message indicating that the WebSocket server is starting
     st.write("Starting WebSocket server...")
-    
     # Start the WebSocket server
     asyncio.run(websocket_server())
