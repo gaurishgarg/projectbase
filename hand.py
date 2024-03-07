@@ -28,12 +28,30 @@ async def websocket_server():
         # Retrieve the assigned port
         assigned_port = server.sockets[0].getsockname()[1]
         st.session_state.websocket_port = assigned_port
+
+        url = 'https://lazy-cyan-toad-cuff.cyclic.app/getdata'
+
+        # Data to be sent in the POST request
+        data = {"port": assigned_port}
+
+        # Send POST request
+        response = requests.post(url, json=data)
+
+        # Check if the request was successful
+        if response.status_code == 200:
+            print('POST request successful!')
+        else:
+            print('POST request failed:', response.status_code)
         st.json({"port": assigned_port, "url":"ws://projectbase-gaurish.streamlit.app"})
-        st.write("Testing HTML")
         await server.wait_closed()
     except OSError as e:
         st.error(f"My OS Error: {e}")
     
+import requests
+
+# URL of the Node.js server
+
+
 
 def start_websocket_server():
     # Display a message indicating that the WebSocket server is starting
