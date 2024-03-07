@@ -26,10 +26,10 @@ async def websocket_server():
     try:
         # Start the WebSocket server listening on 0.0.0.0 (all available interfaces)
         server = await websockets.serve(handle_message, "0.0.0.0", 0)
-        
+        st.write("Websocket Server created")
         # Retrieve the assigned port
         assigned_port = server.sockets[0].getsockname()[1]
-
+        st.write("Websocket Server Port has been assigned")
         async def get_assigned_port(request):
                 return web.json_response({"websocket_port": assigned_port})
             
