@@ -32,15 +32,19 @@ async def websocket_server():
         st.write("Websocket Server Port has been assigned")
         async def get_assigned_port(request):
                 return web.json_response({"websocket_port": assigned_port})
-            
+        st.write("aiohttp function has been defined")    
         aiohttp_app = web.Application()
+        st.write("aiohttp function web app declared")    
         aiohttp_app.router.add_get("/get_websocket_port", get_assigned_port)
-        
+        st.write("aiohttp web app route added")    
         aiohttp_runner = web.AppRunner(aiohttp_app)
+        st.write("aiohttp runner innitialised")    
         await aiohttp_runner.setup()
+        st.write("aiohttp runner set up")    
         aiohttp_site = web.TCPSite(aiohttp_runner, 'localhost', 8000)
+        st.write("aiohttp runner declared")    
         await aiohttp_site.start()
-        
+        st.write("aiohttp site started")    
         st.write(f"WebSocket server running on port {assigned_port}")
         st.write(f"Port information available at http://localhost:8000/get_websocket_port")
 
