@@ -31,6 +31,8 @@ def run():
 
     st.write("Hello World\nThis is Gaurish Backend")
     start_websocket_server()
+
+    # start_websocket_server()
     # st.write("# Welcome to Streamlit! 👋")
 
     # st.sidebar.success("Select a demo above.")
@@ -56,3 +58,5 @@ def run():
 
 if __name__ == "__main__":
     run()
+
+

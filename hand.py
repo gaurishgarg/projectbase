@@ -1,7 +1,7 @@
 import asyncio
 import websockets
 import streamlit as st
-
+from aiohttp import web
 async def handle_message(websocket, path):
     try:
         # Retrieve the original client address
@@ -29,9 +29,22 @@ async def websocket_server():
         
         # Retrieve the assigned port
         assigned_port = server.sockets[0].getsockname()[1]
-        st.write(f"WebSocket server running on port {assigned_port}")
+
+        async def get_assigned_port(request):
+                return web.json_response({"websocket_port": assigned_port})
+            
+        aiohttp_app = web.Application()
+        aiohttp_app.router.add_get("/get_websocket_port", get_assigned_port)
         
-        # Keep the server running indefinitely
+        aiohttp_runner = web.AppRunner(aiohttp_app)
+        await aiohttp_runner.setup()
+        aiohttp_site = web.TCPSite(aiohttp_runner, 'localhost', 8000)
+        await aiohttp_site.start()
+        
+        st.write(f"WebSocket server running on port {assigned_port}")
+        st.write(f"Port information available at http://localhost:8000/get_websocket_port")
+
+        # Keep the WebSocket server running indefinitely
         await server.wait_closed()
     except OSError as e:
         st.error(f"OS Error: {e}")
