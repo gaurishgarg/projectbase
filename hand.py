@@ -35,7 +35,7 @@ async def websocket_server():
         print("My dictionary is")
         print(mydict)
         st.write(mydict)
-        url = 'https://streamcom.onrender.com/getdata'
+        url = "https://long-erin-abalone-gown.cyclic.app/getdata"
     
 
 
