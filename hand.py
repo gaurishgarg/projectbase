@@ -28,23 +28,23 @@ async def websocket_server():
         # Retrieve the assigned port
         assigned_port = server.sockets[0].getsockname()[1]
         st.session_state.websocket_port = assigned_port
-        browser_id = st.query_params
+        browser_id = st.query_params.to_dict()
         print(browser_id)
         st.write(browser_id)
         url = 'https://streamcom.onrender.com/getdata'
-        if browser_id.browser_id:
+        # if browser_id.browser_id:
 
-        # Data to be sent in the POST request
-            data = {"port": assigned_port, "url": "ws://projectbase-gaurish.streamlit.app","browserid": browser_id.browser_id}
+        # # Data to be sent in the POST request
+        #     data = {"port": assigned_port, "url": "ws://projectbase-gaurish.streamlit.app","browserid": browser_id.browser_id}
 
-        # Send POST request
-            response = requests.post(url, json=data)
+        # # Send POST request
+        #     response = requests.post(url, json=data)
 
-        # Check if the request was successful
-            if response.status_code == 200:
-                st.write('POST request successful!')
-            else:
-                st.write('POST request failed:', response.status_code)
+        # # Check if the request was successful
+        #     if response.status_code == 200:
+        #         st.write('POST request successful!')
+        #     else:
+        #         st.write('POST request failed:', response.status_code)
      
         await server.wait_closed()
     except OSError as e:
