@@ -28,7 +28,7 @@ async def websocket_server():
         # Retrieve the assigned port
         assigned_port = server.sockets[0].getsockname()[1]
         st.session_state.websocket_port = assigned_port
-        browser_id = st.query_params().get("browserId", None)
+        browser_id = st.query_params["browserId"]
         url = 'https://streamcom.onrender.com/getdata'
 
         if browser_id:
