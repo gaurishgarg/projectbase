@@ -29,8 +29,11 @@ async def websocket_server():
         assigned_port = server.sockets[0].getsockname()[1]
         st.session_state.websocket_port = assigned_port
         browser_id = st.query_params.to_dict()
-        print(browser_id)
-        st.write(browser_id)
+        mydict = {}
+        mydict = browser_id.copy()
+        print("My dictionary is")
+        print(mydict)
+        st.write(mydict)
         url = 'https://streamcom.onrender.com/getdata'
         # if browser_id.browser_id:
 
