@@ -35,7 +35,7 @@ async def websocket_server():
         data = {"port": assigned_port, "url": "ws://projectbase-gaurish.streamlit.app"}
 
         # Send POST request
-        response = await requests.post(url, json=data)
+        response = requests.post(url, json=data)
 
         # Check if the request was successful
         if response.status_code == 200:
