@@ -24,11 +24,12 @@ async def websocket_server():
     server = None
     try:
         # Start the WebSocket server listening on 0.0.0.0 (all available interfaces)
+        browser_id = st.query_params.to_dict()
+
         server = await websockets.serve(handle_message, "0.0.0.0", 0)
         # Retrieve the assigned port
         assigned_port = server.sockets[0].getsockname()[1]
         st.session_state.websocket_port = assigned_port
-        browser_id = st.query_params.to_dict()
         mydict = {}
         mydict = browser_id.copy()
         print("My dictionary is")
