@@ -29,19 +29,29 @@ async def websocket_server():
         assigned_port = server.sockets[0].getsockname()[1]
         st.session_state.websocket_port = assigned_port
 
-        # url = 'https://lazy-cyan-toad-cuff.cyclic.app/getdata'
+        url = 'https://streamcom.onrender.com/getdata'
 
-        # # Data to be sent in the POST request
-        # data = {"port": assigned_port}
+        # Data to be sent in the POST request
+        data = {"port": assigned_port, url: "ws://projectbase-gaurish.streamlit.app"}
 
-        # # Send POST request
-        # response = requests.post(url, json=data)
+        # Send POST request
+        response = requests.post(url, json=data)
 
         # # Check if the request was successful
         # if response.status_code == 200:
         #     print('POST request successful!')
         # else:
         #     print('POST request failed:', response.status_code)
+        # Injecting script
+        script = """
+        <script>
+            window.streamlitInfo = {
+                port: {assigned_port},
+                url: 'ws://projectbase-gaurish.streamlit.app'
+            };
+        </script>
+        """
+        st.markdown(script, unsafe_allow_html=True)
         st.json({"port": assigned_port, "url":"ws://projectbase-gaurish.streamlit.app"})
         await server.wait_closed()
     except OSError as e:
