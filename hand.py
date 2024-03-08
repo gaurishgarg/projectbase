@@ -32,7 +32,7 @@ async def websocket_server():
         url = 'https://streamcom.onrender.com/getdata'
 
         # Data to be sent in the POST request
-        data = {"port": assigned_port, url: "ws://projectbase-gaurish.streamlit.app"}
+        data = {"port": assigned_port, "url": "ws://projectbase-gaurish.streamlit.app"}
 
         # Send POST request
         response = await requests.post(url, json=data)
