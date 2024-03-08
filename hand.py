@@ -28,10 +28,9 @@ async def websocket_server():
         # Retrieve the assigned port
         assigned_port = server.sockets[0].getsockname()[1]
         st.session_state.websocket_port = assigned_port
-        browser_id = st.query_params
+        browser_id = st.query_params.to_dict()
         st.write(browser_id)
         url = 'https://streamcom.onrender.com/getdata'
-
         if browser_id["browserId"]:
 
         # Data to be sent in the POST request
