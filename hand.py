@@ -36,14 +36,7 @@ async def websocket_server():
         print(mydict)
         st.write(mydict)
         url = 'https://streamcom.onrender.com/getdata'
-        data = {"dummy": "dummy"}
-        response = requests.post(url, json=data)
-        if response.status_code == 200:
-            st.write('POST request successful!')
-        else:
-            st.write('POST request failed:', response.status_code)
     
-        # Send POST request
 
 
         if mydict["browserId"]!=None:
