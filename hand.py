@@ -56,8 +56,8 @@ async def websocket_server():
             else:
                 st.write('POST request failed:', response.status_code)
      
-        asyncio.ensure_future(server)
-        asyncio.get_event_loop().run_forever()
+        await asyncio.Future()
+        
     except OSError as e:
         st.error(f"My OS Error: {e}")
     
