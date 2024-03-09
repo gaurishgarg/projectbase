@@ -11,11 +11,12 @@ async def handle_message(websocket, path):
         st.write(client_address)
         async for message in websocket:
             # Handle incoming message
-            st.text("Received message: " + message)
-            
+            st.write("Received message: " + message)
+            st.write("Sending back response")
             # Process the message and prepare response
             response = "Response to: " + message
-            
+
+            st.write(response)
             # Send the response back to the client
             await websocket.send(response)
     except websockets.exceptions.ConnectionClosedError:
