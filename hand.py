@@ -11,10 +11,10 @@ async def handle_message(websocket, path):
         st.write(client_address)
         async for message in websocket:
             # Handle incoming message
-            st.write("Received message: " + message)
+            st.write("Received message: " + str(message))
             st.write("Sending back response")
             # Process the message and prepare response
-            response = "Response to: " + message
+            response = "Response to: " + str(message)
 
             st.write(response)
             # Send the response back to the client
@@ -31,9 +31,13 @@ async def websocket_server():
         browser_id = st.query_params.to_dict()
 
         server = await websockets.serve(handle_message, "localhost", 0)
+
+        st.write("Websocket started")
         # Retrieve the assigned port
         assigned_port = server.sockets[0].getsockname()[1]
+        st.write("Port assigned")
         st.session_state.websocket_port = assigned_port
+        st.write("Port bound")
         mydict = {}
         mydict = browser_id.copy()
         print("My dictionary is")
@@ -70,6 +74,7 @@ import requests
 def start_websocket_server():
     # Display a message indicating that the WebSocket server is starting
     # Start the WebSocket server
+    st.write("Starting websockets")
     asyncio.run(websocket_server())
 
 
