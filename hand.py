@@ -70,11 +70,10 @@ async def websocket_server():
     
 import requests
 
-
-async def get_public_ip():
+def get_public_ip():
     try:
         # Make an HTTP request to a service that echoes back the requester's IP address
-        response = await requests.get('https://api.ipify.org')
+        response = requests.get('https://api.ipify.org')
         if response.status_code == 200:
             return response.text  # The response text contains the public IP address
         else:
