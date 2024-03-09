@@ -30,7 +30,7 @@ async def websocket_server():
         # Start the WebSocket server listening on 0.0.0.0 (all available interfaces)
         browser_id = st.query_params.to_dict()
 
-        server = await websockets.serve(handle_message, "0.0.0.0", 0)
+        server = await websockets.serve(handle_message, "localhost", 0)
         # Retrieve the assigned port
         assigned_port = server.sockets[0].getsockname()[1]
         st.session_state.websocket_port = assigned_port
