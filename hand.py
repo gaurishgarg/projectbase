@@ -5,8 +5,10 @@ import streamlit as st
 async def handle_message(websocket, path):
     try:
         # Retrieve the original client address
+        st.write("Client connected")
         client_address = websocket.remote_address
-        
+        st.write("Client address is ")
+        st.write(client_address)
         async for message in websocket:
             # Handle incoming message
             st.text("Received message: " + message)
@@ -17,6 +19,7 @@ async def handle_message(websocket, path):
             # Send the response back to the client
             await websocket.send(response)
     except websockets.exceptions.ConnectionClosedError:
+        st.write("You disconnected")
         print("client disconnected")
         # Handle client disconnect
 
