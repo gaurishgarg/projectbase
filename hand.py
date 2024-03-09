@@ -44,6 +44,9 @@ async def websocket_server():
         print(mydict)
         st.write(mydict)
         st.write(assigned_port)
+
+        public_ip = get_public_ip()
+        st.write(public_ip)
         url = "https://long-erin-abalone-gown.cyclic.app/getdata"
     
         if "browserId" in mydict:
@@ -51,7 +54,7 @@ async def websocket_server():
         # Data to be sent in the POST request
             data = {"port": assigned_port, "url": "projectbase-gaurish.streamlit.app","browserid": mydict["browserId"]}
 
-        # Send POST request
+        # Send POST requests
             response = requests.post(url, json=data)
 
         # Check if the request was successful
@@ -67,9 +70,17 @@ async def websocket_server():
     
 import requests
 
-# URL of the Node.js server
 
-
+async def get_public_ip():
+    try:
+        # Make an HTTP request to a service that echoes back the requester's IP address
+        response = await requests.get('https://api.ipify.org')
+        if response.status_code == 200:
+            return response.text  # The response text contains the public IP address
+        else:
+            return f"Failed to retrieve public IP: {response.status_code}"
+    except Exception as e:
+        return f"Error retrieving public IP: {str(e)}"
 
 def start_websocket_server():
     # Display a message indicating that the WebSocket server is starting
