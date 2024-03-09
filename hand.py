@@ -39,12 +39,11 @@ async def websocket_server():
         print("My dictionary is")
         print(mydict)
         st.write(mydict)
+        st.write(assigned_port)
         url = "https://long-erin-abalone-gown.cyclic.app/getdata"
     
-
-
-        if mydict["browserId"]!=None:
-
+        if "browserId" in mydict:
+            st.write("ws://projectbase-gaurish.streamlit.app:"+assigned_port+"/")
         # Data to be sent in the POST request
             data = {"port": assigned_port, "url": "ws://projectbase-gaurish.streamlit.app","browserid": mydict["browserId"]}
 
